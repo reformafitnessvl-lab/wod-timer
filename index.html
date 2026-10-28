@@ -7,14 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f1015;
-            --card-bg: #181a22;
+            --bg-color: #0b0c10;
+            --card-bg: #15171e;
             --accent-red: #ff2a2a;
             --accent-green: #00e676;
             --accent-yellow: #ffea00;
             --text-main: #ffffff;
-            --text-muted: #8b90a0;
-            --border-color: #262a36;
+            --text-muted: #7d8499;
+            --border-color: #222634;
         }
 
         * {
@@ -29,186 +29,141 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: 'Montserrat', sans-serif;
-            min-height: 100vh;
+            height: 100vh;
+            height: 100dvh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         header {
-            padding: 16px 20px;
+            padding: 12px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
         }
 
         .logo {
             font-family: 'Teko', sans-serif;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 700;
             letter-spacing: 1.5px;
-            color: var(--text-main);
         }
 
         .logo span {
             color: var(--accent-red);
         }
 
+        .config-icon-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-family: 'Teko', sans-serif;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
         main {
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 20px;
-            max-width: 600px;
-            width: 100%;
-            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
         }
 
         .view {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: none;
             flex-direction: column;
-            flex: 1;
+            padding: 16px;
+            background: var(--bg-color);
         }
 
         .view.active {
             display: flex;
         }
 
-        /* Выбор режима */
-        .modes-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .mode-card {
-            background: var(--card-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 14px;
-            padding: 20px 16px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-        }
-
-        .mode-card:active {
-            transform: scale(0.97);
-        }
-
-        .mode-card.selected {
-            border-color: var(--accent-red);
-            background: rgba(255, 42, 42, 0.05);
-        }
-
-        .mode-title {
-            font-family: 'Teko', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-        }
-
-        .mode-desc {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.3;
-        }
-
-        /* Настройки параметров */
-        .settings-container {
-            background: var(--card-bg);
-            border-radius: 14px;
-            padding: 16px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border-color);
-        }
-
-        .setting-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .setting-row:last-child {
-            border-bottom: none;
-        }
-
-        .setting-label {
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .stepper {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .stepper-btn {
-            background: #232733;
-            border: none;
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
+        /* ГЛАВНЫЙ ЭКРАН - ТОЛЬКО ТАБАТА И СТАРТ */
+        #home-view {
             justify-content: center;
-        }
-
-        .stepper-btn:active {
-            background: var(--accent-red);
-        }
-
-        .stepper-value {
-            font-family: 'Teko', sans-serif;
-            font-size: 26px;
-            width: 45px;
+            align-items: center;
             text-align: center;
+            padding: 20px;
         }
 
-        /* Кнопка старта */
-        .start-btn {
+        .hero-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .big-start-btn {
             background: var(--accent-red);
             color: white;
             border: none;
-            border-radius: 14px;
-            padding: 18px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 380px;
+            padding: 28px 20px;
             font-family: 'Teko', sans-serif;
-            font-size: 32px;
+            font-size: 42px;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 42, 42, 0.4);
+            transition: transform 0.1s ease;
+            margin-bottom: 16px;
+        }
+
+        .big-start-btn:active {
+            transform: scale(0.96);
+        }
+
+        .custom-modes-link {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-family: 'Teko', sans-serif;
+            font-size: 22px;
+            letter-spacing: 1px;
             cursor: pointer;
             width: 100%;
-            margin-top: auto;
-            box-shadow: 0 8px 24px rgba(255, 42, 42, 0.3);
-            transition: transform 0.1s ease;
+            max-width: 380px;
+            text-transform: uppercase;
         }
 
-        .start-btn:active {
-            transform: scale(0.98);
-        }
-
-        /* ЭКРАН ТАЙМЕРА */
+        /* ЭКРАН ТАЙМЕРА (БЕЗ СКРОЛЛА) */
         #timer-view {
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            padding: 10px 0;
+            padding: 10px 16px 20px 16px;
         }
 
         .timer-header-info {
             font-family: 'Teko', sans-serif;
-            font-size: 24px;
+            font-size: 22px;
             letter-spacing: 1px;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -216,24 +171,22 @@
 
         .phase-indicator {
             font-family: 'Teko', sans-serif;
-            font-size: 48px;
+            font-size: 46px;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin: 10px 0;
-            transition: color 0.3s ease;
+            margin: 4px 0;
         }
 
         .phase-work { color: var(--accent-red); }
         .phase-rest { color: var(--accent-green); }
         .phase-prep { color: var(--accent-yellow); }
 
-        /* Круговой таймер */
         .timer-circle-wrapper {
             position: relative;
-            width: 280px;
-            height: 280px;
-            margin: 10px auto;
+            width: 260px;
+            height: 260px;
+            margin: auto;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -269,35 +222,34 @@
 
         .timer-digits {
             font-family: 'Teko', sans-serif;
-            font-size: 76px;
+            font-size: 78px;
             font-weight: 700;
             line-height: 1;
             letter-spacing: 2px;
         }
 
         .timer-sub-digits {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-muted);
             font-weight: 600;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
-        /* Панель управления таймером */
         .timer-controls {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             width: 100%;
-            max-width: 360px;
-            margin-top: auto;
+            max-width: 380px;
+            flex-shrink: 0;
         }
 
         .control-btn {
             flex: 1;
-            padding: 16px;
+            padding: 14px;
             border-radius: 14px;
             border: none;
             font-family: 'Teko', sans-serif;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             letter-spacing: 1px;
             cursor: pointer;
@@ -305,7 +257,7 @@
         }
 
         .btn-pause {
-            background: #232733;
+            background: var(--card-bg);
             color: white;
             border: 1px solid var(--border-color);
         }
@@ -316,8 +268,103 @@
             border: 1px solid rgba(255, 42, 42, 0.3);
         }
 
-        .control-btn:active {
-            transform: scale(0.97);
+        /* ЭКРАН НАСТРОЕК / ДРУГИХ ПРОТОКОЛОВ */
+        #settings-view {
+            justify-content: flex-start;
+        }
+
+        .settings-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .back-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'Teko', sans-serif;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .modes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .mode-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 12px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .mode-card.selected {
+            border-color: var(--accent-red);
+            background: rgba(255, 42, 42, 0.05);
+        }
+
+        .mode-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .mode-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .settings-box {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 16px;
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .setting-row:last-child { border-bottom: none; }
+        .setting-label { font-size: 13px; font-weight: 600; }
+
+        .stepper { display: flex; align-items: center; gap: 10px; }
+        .stepper-btn {
+            background: #232733; border: none; color: white;
+            width: 32px; height: 32px; border-radius: 6px;
+            font-size: 16px; font-weight: bold; cursor: pointer;
+        }
+        .stepper-value { font-family: 'Teko', sans-serif; font-size: 22px; width: 35px; text-align: center; }
+
+        .settings-start-btn {
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 16px;
+            font-family: 'Teko', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            width: 100%;
+            margin-top: auto;
         }
     </style>
 </head>
@@ -325,38 +372,19 @@
 
     <header>
         <div class="logo">WOD<span>TIMER</span></div>
+        <button class="config-icon-btn" onclick="switchView('settings-view')">ПРОТОКОЛЫ</button>
     </header>
 
     <main>
-        <!-- ЭКРАН НАСТРОЙКИ -->
-        <div id="setup-view" class="view active">
-            <div class="modes-grid">
-                <div class="mode-card selected" onclick="selectMode('tabata')">
-                    <div class="mode-title">Tabata</div>
-                    <div class="mode-desc">20с работа / 10с отдых, 8 раундов</div>
-                </div>
-                <div class="mode-card" onclick="selectMode('hiit')">
-                    <div class="mode-title">HIIT</div>
-                    <div class="mode-desc">Интервальная высокоинтенсивная тренировка</div>
-                </div>
-                <div class="mode-card" onclick="selectMode('emom')</div>
-                    <div class="mode-title">EMOM</div>
-                    <div class="mode-desc">Каждую минуту на протяжении раунда</div>
-                </div>
-                <div class="mode-card" onclick="selectMode('amrap')">
-                    <div class="mode-title">AMRAP</div>
-                    <div class="mode-desc">Максимум раундов за отведенное время</div>
-                </div>
-            </div>
-
-            <div class="settings-container" id="dynamic-settings">
-                <!-- Динамические настройки рендерятся через JS -->
-            </div>
-
-            <button class="start-btn" onclick="startWorkout()">СТАРТ</button>
+        <!-- ГЛАВНЫЙ ЭКРАН (БЫСТРЫЙ СТАРТ ТАБАТЫ) -->
+        <div id="home-view" class="view active">
+            <div class="hero-title">КЛАССИЧЕСКАЯ<br>ТАБАТА</div>
+            <div class="hero-subtitle">20 сек работа / 10 сек отдых • 8 раундов</div>
+            <button class="big-start-btn" onclick="startTabataQuick()">СТАРТ</button>
+            <button class="custom-modes-link" onclick="switchView('settings-view')">Другие протоколы (EMOM, AMRAP)</button>
         </div>
 
-        <!-- ЭКРАН ТАЙМЕРА -->
+        <!-- ЭКРАН ТАЙМЕРА (БЕЗ СКРОЛЛА) -->
         <div id="timer-view" class="view">
             <div class="timer-header-info" id="timer-round-info">Раунд 1 / 8</div>
             <div class="phase-indicator phase-work" id="phase-title">РАБОТА</div>
@@ -377,100 +405,241 @@
                 <button class="control-btn btn-stop" onclick="stopWorkout()">СТОП</button>
             </div>
         </div>
+
+        <!-- ЭКРАН КАСТОМНЫХ НАСТРОЕК -->
+        <div id="settings-view" class="view">
+            <div class="settings-header">
+                <button class="back-btn" onclick="switchView('home-view')">← Назад</button>
+                <div style="font-family: 'Teko'; font-size: 22px;">ВЫБОР ПРОТОКОЛА</div>
+                <div style="width: 60px;"></div>
+            </div>
+
+            <div class="modes-grid">
+                <div class="mode-card selected" onclick="selectMode('tabata', event)">
+                    <div class="mode-title">Tabata</div>
+                    <div class="mode-desc">20с работа / 10с отдых</div>
+                </div>
+                <div class="mode-card" onclick="selectMode('hiit', event)">
+                    <div class="mode-title">HIIT</div>
+                    <div class="mode-desc">Кастомный интервал</div>
+                </div>
+                <div class="mode-card" onclick="selectMode('emom', event)">
+                    <div class="mode-title">EMOM</div>
+                    <div class="mode-desc">Каждую минуту</div>
+                </div>
+                <div class="mode-card" onclick="selectMode('amrap', event)">
+                    <div class="mode-title">AMRAP</div>
+                    <div class="mode-desc">Максимум раундов</div>
+                </div>
+            </div>
+
+            <div class="settings-box" id="dynamic-settings"></div>
+
+            <button class="settings-start-btn" onclick="startCustomWorkout()">ЗАПУСТИТЬ</button>
+        </div>
     </main>
 
     <script>
         let currentMode = 'tabata';
         
-        // Настройки режимов по умолчанию
         let settings = {
             tabata: { work: 20, rest: 10, rounds: 8, prep: 10 },
             hiit: { work: 45, rest: 15, rounds: 5, prep: 10 },
             emom: { work: 60, rest: 0, rounds: 10, prep: 10 },
-            amrap: { work: 600, rest: 0, rounds: 1, prep: 10 } // 10 минут
+            amrap: { work: 600, rest: 0, rounds: 1, prep: 10 }
         };
 
-        // Состояние запущенного таймера
         let timerState = {
             isRunning: false,
             isPaused: false,
-            phase: 'prep', // prep, work, rest, finished
+            phase: 'prep',
             currentRound: 1,
             timeLeft: 0,
             phaseDuration: 0,
-            totalTimeLeft: 0,
             intervalId: null,
-            startTime: 0,
-            duration: 0,
             rafId: null
         };
 
-        const circumference = 2 * Math.PI * 44; // ~276.46
+        const circumference = 2 * Math.PI * 44;
         const progressRing = document.getElementById('progress-ring');
         progressRing.style.strokeDasharray = circumference;
 
-        // Инициализация звука (Web Audio API - свисток)
-        let audioCtx = null;
-
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+        // Синтезатор всратой мемной озвучки (Web Speech API)
+        function speakMeme(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ru-RU';
+            utterance.rate = 1.1; // Чуть быстрее для энергии
+            utterance.pitch = 0.7; // Ниже голос (гнусаво-брутальный оттенок)
+            window.speechSynthesis.speak(utterance);
         }
 
-        function playWhistle(type = 'short') {
-            try {
-                initAudio();
-                const now = audioCtx.currentTime;
-                
-                // Осциллятор для частоты свистка (двойной пик для реалистичности)
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
+        function switchView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            if (viewId === 'settings-view') renderSettings();
+        }
 
-                osc.type = 'sine';
-                
-                if (type === 'long') {
-                    osc.frequency.setValueAtTime(2600, now);
-                    osc.frequency.linearRampToValueAtTime(3200, now + 0.15);
-                    osc.frequency.linearRampToValueAtTime(2800, now + 0.4);
-                    
-                    gain.gain.setValueAtTime(0.3, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
-                    
-                    osc.start(now);
-                    osc.stop(now + 0.45);
-                } else if (type === 'prep') {
-                    // Короткий высокий сигнал
-                    osc.frequency.setValueAtTime(2400, now);
-                    gain.gain.setValueAtTime(0.2, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
-                    
-                    osc.start(now);
-                    osc.stop(now + 0.12);
+        function startTabataQuick() {
+            currentMode = 'tabata';
+            startWorkoutEngine(settings.tabata);
+        }
+
+        function startCustomWorkout() {
+            startWorkoutEngine(settings[currentMode]);
+        }
+
+        function startWorkoutEngine(cfg) {
+            timerState.currentRound = 1;
+            timerState.isPaused = false;
+            timerState.isRunning = true;
+
+            if (cfg.prep > 0) {
+                timerState.phase = 'prep';
+                timerState.timeLeft = cfg.prep;
+                timerState.phaseDuration = cfg.prep;
+                speakMeme("Ну привет, ублюдок. Время пришло.");
+            } else {
+                timerState.phase = 'work';
+                timerState.timeLeft = cfg.work;
+                timerState.phaseDuration = cfg.work;
+                speakMeme("Ты дерьмо, ублюдок, иди сюда!");
+            }
+
+            switchView('timer-view');
+            startTimerInterval();
+        }
+
+        function startTimerInterval() {
+            if (timerState.intervalId) clearInterval(timerState.intervalId);
+            if (timerState.rafId) cancelAnimationFrame(timerState.rafId);
+
+            timerState.intervalId = setInterval(() => {
+                if (timerState.isPaused) return;
+
+                timerState.timeLeft--;
+
+                if (timerState.timeLeft === 3) speakMeme("Три");
+                if (timerState.timeLeft === 2) speakMeme("Два");
+                if (timerState.timeLeft === 1) speakMeme("Один");
+
+                if (timerState.timeLeft < 0) {
+                    nextPhase();
                 } else {
-                    // Короткий свисток с трелью
-                    osc.frequency.setValueAtTime(2800, now);
-                    osc.frequency.setValueAtTime(3400, now + 0.05);
-                    osc.frequency.setValueAtTime(2800, now + 0.1);
-                    
-                    gain.gain.setValueAtTime(0.25, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
-                    
-                    osc.start(now);
-                    osc.stop(now + 0.25);
+                    updateTimerDisplay();
                 }
+            }, 1000);
 
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-            } catch (e) {
-                console.log("Audio play error", e);
+            function animLoop() {
+                if (!timerState.isRunning) return;
+                if (!timerState.isPaused) {
+                    updateRingProgress();
+                }
+                timerState.rafId = requestAnimationFrame(animLoop);
             }
+            animLoop();
+            updateTimerDisplay();
         }
 
-        function selectMode(mode) {
+        function nextPhase() {
+            const cfg = settings[currentMode];
+
+            if (timerState.phase === 'prep') {
+                speakMeme("Ты дерьмо, ублюдок, иди сюда!");
+                timerState.phase = 'work';
+                timerState.timeLeft = cfg.work;
+                timerState.phaseDuration = cfg.work;
+            } else if (timerState.phase === 'work') {
+                if (cfg.rest > 0 && timerState.currentRound < cfg.rounds) {
+                    speakMeme("Свободен, салага. Передохни.");
+                    timerState.phase = 'rest';
+                    timerState.timeLeft = cfg.rest;
+                    timerState.phaseDuration = cfg.rest;
+                } else if (timerState.currentRound < cfg.rounds) {
+                    timerState.currentRound++;
+                    speakMeme("Думал легко будет? А вот хрен, погнали снова!");
+                    timerState.phase = 'work';
+                    timerState.timeLeft = cfg.work;
+                    timerState.phaseDuration = cfg.work;
+                } else {
+                    finishWorkout();
+                    return;
+                }
+            } else if (timerState.phase === 'rest') {
+                timerState.currentRound++;
+                speakMeme("Взлет! Работай!");
+                timerState.phase = 'work';
+                timerState.timeLeft = cfg.work;
+                timerState.phaseDuration = cfg.work;
+            }
+
+            updateTimerDisplay();
+        }
+
+        function updateTimerDisplay() {
+            const cfg = settings[currentMode];
+            const phaseTitle = document.getElementById('phase-title');
+            const roundInfo = document.getElementById('timer-round-info');
+            const digits = document.getElementById('timer-time');
+            const subDigits = document.getElementById('timer-total-sub');
+
+            digits.innerText = timerState.timeLeft;
+
+            if (currentMode === 'amrap') {
+                roundInfo.innerText = `AMRAP ТРЕНИРОВКА`;
+            } else {
+                roundInfo.innerText = `Раунд ${timerState.currentRound} / ${cfg.rounds}`;
+            }
+
+            if (timerState.phase === 'prep') {
+                phaseTitle.innerText = 'ПОДГОТОВКА';
+                phaseTitle.className = 'phase-indicator phase-prep';
+                progressRing.style.stroke = 'var(--accent-yellow)';
+            } else if (timerState.phase === 'work') {
+                phaseTitle.innerText = 'РАБОТА';
+                phaseTitle.className = 'phase-indicator phase-work';
+                progressRing.style.stroke = 'var(--accent-red)';
+            } else if (timerState.phase === 'rest') {
+                phaseTitle.innerText = 'ОТДЫХ';
+                phaseTitle.className = 'phase-indicator phase-rest';
+                progressRing.style.stroke = 'var(--accent-green)';
+            }
+
+            const m = Math.floor(timerState.timeLeft / 60);
+            const s = timerState.timeLeft % 60;
+            subDigits.innerText = `Осталось: ${m}:${s < 10 ? '0' : ''}${s}`;
+        }
+
+        function updateRingProgress() {
+            const fraction = timerState.phaseDuration > 0 ? (timerState.timeLeft / timerState.phaseDuration) : 0;
+            const offset = circumference - (fraction * circumference);
+            progressRing.style.strokeDashoffset = offset;
+        }
+
+        function togglePause() {
+            timerState.isPaused = !timerState.isPaused;
+            const btn = document.getElementById('pause-btn');
+            btn.innerText = timerState.isPaused ? 'ПРОДОЛЖИТЬ' : 'ПАУЗА';
+            if (timerState.isPaused) speakMeme("Пауза для слабаков");
+        }
+
+        function stopWorkout() {
+            timerState.isRunning = false;
+            if (timerState.intervalId) clearInterval(timerState.intervalId);
+            if (timerState.rafId) cancelAnimationFrame(timerState.rafId);
+            window.speechSynthesis.cancel();
+
+            switchView('home-view');
+            document.getElementById('pause-btn').innerText = 'ПАУЗА';
+        }
+
+        function finishWorkout() {
+            speakMeme("Ты сделал это, чемпион! Но ты всё еще дерьмо.");
+            stopWorkout();
+        }
+
+        function selectMode(mode, event) {
             currentMode = mode;
             document.querySelectorAll('.mode-card').forEach(card => card.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
@@ -518,173 +687,9 @@
                 document.getElementById('val-workMinutes').innerText = newMins;
                 return;
             }
-
             cfg[key] = Math.max(min, Math.min(max, cfg[key] + delta));
             document.getElementById(`val-${key}`).innerText = cfg[key];
         }
-
-        // Запуск тренировки
-        function startWorkout() {
-            initAudio();
-            const cfg = settings[currentMode];
-
-            timerState.currentRound = 1;
-            timerState.isPaused = false;
-            timerState.isRunning = true;
-
-            if (cfg.prep > 0) {
-                timerState.phase = 'prep';
-                timerState.timeLeft = cfg.prep;
-                timerState.phaseDuration = cfg.prep;
-            } else {
-                timerState.phase = 'work';
-                timerState.timeLeft = cfg.work;
-                timerState.phaseDuration = cfg.work;
-            }
-
-            document.getElementById('setup-view').classList.remove('active');
-            document.getElementById('timer-view').classList.add('active');
-
-            startTimerInterval();
-        }
-
-        function startTimerInterval() {
-            timerState.startTime = performance.now();
-            timerState.duration = timerState.timeLeft;
-
-            if (timerState.intervalId) clearInterval(timerState.intervalId);
-            if (timerState.rafId) cancelAnimationFrame(timerState.rafId);
-
-            timerState.intervalId = setInterval(() => {
-                if (timerState.isPaused) return;
-
-                timerState.timeLeft--;
-
-                if (timerState.timeLeft <= 3 && timerState.timeLeft > 0) {
-                    playWhistle('prep');
-                }
-
-                if (timerState.timeLeft < 0) {
-                    nextPhase();
-                } else {
-                    updateTimerDisplay();
-                }
-            }, 1000);
-
-            // Плавный анимационный процесс круга
-            function animLoop() {
-                if (!timerState.isRunning) return;
-                if (!timerState.isPaused) {
-                    updateRingProgress();
-                }
-                timerState.rafId = requestAnimationFrame(animLoop);
-            }
-            animLoop();
-        }
-
-        function nextPhase() {
-            const cfg = settings[currentMode];
-
-            if (timerState.phase === 'prep') {
-                playWhistle('long');
-                timerState.phase = 'work';
-                timerState.timeLeft = cfg.work;
-                timerState.phaseDuration = cfg.work;
-            } else if (timerState.phase === 'work') {
-                if (cfg.rest > 0 && timerState.currentRound < cfg.rounds) {
-                    playWhistle('short');
-                    timerState.phase = 'rest';
-                    timerState.timeLeft = cfg.rest;
-                    timerState.phaseDuration = cfg.rest;
-                } else if (timerState.currentRound < cfg.rounds) {
-                    timerState.currentRound++;
-                    playWhistle('long');
-                    timerState.phase = 'work';
-                    timerState.timeLeft = cfg.work;
-                    timerState.phaseDuration = cfg.work;
-                } else {
-                    finishWorkout();
-                    return;
-                }
-            } else if (timerState.phase === 'rest') {
-                timerState.currentRound++;
-                playWhistle('long');
-                timerState.phase = 'work';
-                timerState.timeLeft = cfg.work;
-                timerState.phaseDuration = cfg.work;
-            }
-
-            timerState.startTime = performance.now();
-            timerState.duration = timerState.timeLeft;
-            updateTimerDisplay();
-        }
-
-        function updateTimerDisplay() {
-            const cfg = settings[currentMode];
-            const phaseTitle = document.getElementById('phase-title');
-            const roundInfo = document.getElementById('timer-round-info');
-            const digits = document.getElementById('timer-time');
-            const subDigits = document.getElementById('timer-total-sub');
-
-            digits.innerText = timerState.timeLeft;
-
-            if (currentMode === 'amrap') {
-                roundInfo.innerText = `AMRAP ТРЕНИРОВКА`;
-            } else {
-                roundInfo.innerText = `Раунд ${timerState.currentRound} / ${cfg.rounds}`;
-            }
-
-            if (timerState.phase === 'prep') {
-                phaseTitle.innerText = 'ПОДГОТОВКА';
-                phaseTitle.className = 'phase-indicator phase-prep';
-                progressRing.style.stroke = 'var(--accent-yellow)';
-            } else if (timerState.phase === 'work') {
-                phaseTitle.innerText = currentMode === 'amrap' ? 'РАБОТАЕМ' : 'РАБОТА';
-                phaseTitle.className = 'phase-indicator phase-work';
-                progressRing.style.stroke = 'var(--accent-red)';
-            } else if (timerState.phase === 'rest') {
-                phaseTitle.innerText = 'ОТДЫХ';
-                phaseTitle.className = 'phase-indicator phase-rest';
-                progressRing.style.stroke = 'var(--accent-green)';
-            }
-
-            const totalSec = timerState.timeLeft;
-            const m = Math.floor(totalSec / 60);
-            const s = totalSec % 60;
-            subDigits.innerText = `Осталось фазы: ${m}:${s < 10 ? '0' : ''}${s}`;
-        }
-
-        function updateRingProgress() {
-            const fraction = timerState.phaseDuration > 0 ? (timerState.timeLeft / timerState.phaseDuration) : 0;
-            const offset = circumference - (fraction * circumference);
-            progressRing.style.strokeDashoffset = offset;
-        }
-
-        function togglePause() {
-            timerState.isPaused = !timerState.isPaused;
-            const btn = document.getElementById('pause-btn');
-            btn.innerText = timerState.isPaused ? 'ПРОДОЛЖИТЬ' : 'ПАУЗА';
-        }
-
-        function stopWorkout() {
-            timerState.isRunning = false;
-            if (timerState.intervalId) clearInterval(timerState.intervalId);
-            if (timerState.rafId) cancelAnimationFrame(timerState.rafId);
-
-            document.getElementById('timer-view').classList.remove('active');
-            document.getElementById('setup-view').classList.add('active');
-            document.getElementById('pause-btn').innerText = 'ПАУЗА';
-        }
-
-        function finishWorkout() {
-            playWhistle('long');
-            setTimeout(() => playWhistle('long'), 300);
-            stopWorkout();
-            alert('Тренировка завершена! Отличная работа!');
-        }
-
-        // Первичный рендер настроек при загрузке
-        renderSettings();
     </script>
 </body>
 </html>
